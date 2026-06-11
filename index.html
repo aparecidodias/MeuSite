@@ -1,186 +1,305 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrunoArts</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link class="img-fluid" rel="shortcut icon" href="img/Favicon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        :root {
+            --bg-principal: #0b0f19;
+            --bg-card: #1e293b;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+        body {
+            background-color: var(--bg-principal);
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
 
+        /* Navbar estilo Glassmorphism */
+        .navbar {
+            background: rgba(11, 15, 25, 0.8) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 80px 0;
+            background: radial-gradient(circle at top right, rgba(30, 58, 138, 0.4), transparent 50%);
+        }
+
+        /* Estilização das fotos de perfil */
+        .foto-desktop {
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
+            object-fit: cover;
+            width: 280px;
+            height: 280px;
+        }
+
+        .foto-mobile {
+            border-radius: 20px;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+            object-fit: cover;
+            width: 200px;
+            height: 200px;
+        }
+
+        /* Carrossel Ajustado para NÃO cortar as imagens e colocar texto abaixo */
+        .carousel {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #151f32;
+        }
+
+        .carousel-img-container {
+            width: 100%;
+            height: 400px; /* Altura fixa para a área da imagem */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0f172a;
+        }
+
+        .carousel img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Mantém a imagem inteira sem cortes */
+            filter: brightness(0.95);
+            transition: filter 0.3s ease;
+        }
+
+        .carousel-item:hover img {
+            filter: brightness(1);
+        }
+
+        /* Nova área de texto abaixo da imagem */
+        .project-info {
+            background-color: var(--bg-card);
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .project-info h5 {
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            color: #94a3b8;
+            margin-bottom: 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Badges de Skills */
+        .skill-badge {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-badge:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Rodapé */
+        footer {
+            background: #020617;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-outline-light:hover {
+            background-color: var(--accent);
+            border-color: var(--accent);
+        }
+    </style>
 </head>
-
 <body>
-    <header>
-        <main>
 
-            <section class="bg-primary  text-light min-vh-100">
-                <div class="container">
-                    <div class="row">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="#">&lt;Bruno.TI /&gt;</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projetos">Projetos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-
-                        <div class="col">
-                            <h1>Sobre mim</h1>
-                            <p>Olá! Me chamo Bruno Aparecido Dias, tenho 26 anos e sou um estudante de TI. Sempre busco
-                                novos conhecimentos que possam me fazer evoluir. Terminei de fazer o curso de
-                                administração e achei bom o complemento em TI , tenho o hobby de escrever poesias e
-                                músicas. Meu foco e aprender mais e mais sobre IA conseguindo ao longo do tempo trazer
-                                algo inovador para o publico. </p>
-
-                        </div>
-
-                        <div class="card">
-                            <img class=" d-block d-md-none" width="350" src="img/foto BR.png" alt="Imagem Bruno">
-                            <div class="card">
-
-
-                                <img class="d-none d-md-block" width="250" src="img/Foto Brunoo.png" alt="Imagem BrunoArts">
-
-
-                            </div>
-                        </div>
-
+    <section id="sobre" class="hero">
+        <div class="container">
+            <div class="row align-items-center row-gap-4">
+                <div class="col-lg-7 text-center text-lg-start order-2 order-lg-1">
+                    <span class="badge bg-primary mb-2 px-3 py-2 fs-6">Disponível para Projetos</span>
+                    <h1 class="display-3 fw-bold text-white mb-3">Bruno Dias</h1>
+                    <p class="lead text-secondary mb-4">
+                        Formado em Administração e atualmente estudante do Curso Técnico de Informática. 
+                        Amo unir a precisão da gestão com a sensibilidade de compor músicas e poesias, trazendo essa mesma criatividade e visão analítica para o desenvolvimento Front-End. 
+                        Focado em aplicar lógica de programação e ferramentas modernas para construir interfaces eficientes, organizadas e totalmente otimizadas para o usuário.
+                    </p>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
+                        <a href="https://github.com/" target="_blank" class="btn btn-outline-light px-4 py-2"><i class="bi bi-github me-2"></i>GitHub</a>
+                        <a href="https://linkedin.com/" target="_blank" class="btn btn-primary px-4 py-2"><i class="bi bi-linkedin me-2"></i>LinkedIn</a>
                     </div>
-
-
-                   
-
-
-
-
-
-
-
-            </section>
-
-            <section class="bg-primary text-center text-light">
-                <div class="container">
-
-
-                    <h1>Portifólio</h1>
-                    <p>Meus trabalhos desenvolvidos no curso técnico de informática. As atividades foram desenvolvidos
-                        ao longo dos 3 módulos, nos conteúdos de Programação para internet, Linguagem orientada a
-                        objetos, Banco de Dados e Desenvolvimento Web.</p>
-                    <div class="row">
-
-
-                        <div class="colcol-md-3 rounded-3 border  text-center fst-italic pt-3 text-light"
-                            style="background-color: rgb(56, 79, 212);">
-                            <img class="border border-3" width="300" src="img/CarrinhoCompras.png" alt="">
-                            <h2>Carrinho de compras</h2>
-                            <p>Site que mostra suas compras ,total,produto</p>
-
-
-                        </div>
-                        <div class="colcol-md-3 rounded-3 border  text-center fst-italic pt-3 text-light"
-                            style="background-color: rgb(56, 79, 212);">
-                            <img class="border border-3" width="300" src="img/SorteadorNumeros.png" alt="">
-                            <h2>sorteador de Números</h2>
-                            <p>Site que mostra o sorteio de números</p>
-
-                        </div>
-
-                    </div>
-
                 </div>
+                
+                <div class="col-lg-5 text-center order-1 order-lg-2">
+                    <img src="img/foto BR.png" class="img-fluid foto-mobile d-block d-lg-none mx-auto" alt="Foto de perfil de Bruno Dias (Mobile)">
+                    
+                    <img src="img/Foto Brunoo.png" class="img-fluid foto-desktop d-none d-lg-block mx-auto" alt="Foto de perfil de Bruno Dias">
+                </div>
+            </div>
+        </div>
+    </section>
 
-            </section>
+    <section id="habilidades" class="container py-5 text-center">
+        <hr class="opacity-10 my-5">
+        <h2 class="fw-bold mb-4">🛠️ Minhas Habilidades</h2>
+        <div class="d-flex flex-wrap justify-content-center max-w-xl mx-auto">
+            <span class="skill-badge"><i class="bi bi-filetype-html text-danger me-2"></i>HTML</span>
+            <span class="skill-badge"><i class="bi bi-filetype-css text-primary me-2"></i>CSS</span>
+            <span class="skill-badge"><i class="bi bi-filetype-js text-warning me-2"></i>JavaScript</span>
+            <span class="skill-badge"><i class="bi bi-bootstrap-fill text-purple me-2" style="color: #7952b3;"></i>Bootstrap</span>
+            <span class="skill-badge"><i class="bi bi-git me-2" style="color: #f1502f;"></i>Git & GitHub</span>
+            <span class="skill-badge"><i class="bi bi-cpu me-2 text-info"></i>Lógica de Programação</span>
+        </div>
+    </section>
 
+    <section id="projetos" class="container py-5">
+        <hr class="opacity-10 my-5">
+        
+        <h2 class="text-center fw-bold mb-5">⭐ Trabalhos Favoritos</h2>
+        <div id="favoritosCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="carousel-img-container">
+                        <img src="img/CarrinhoCompras.png" alt="Projeto Carrinho de Compras">
+                    </div>
+                    <div class="project-info">
+                        <h5 class="fw-bold fs-4">Carrinho de Compras</h5>
+                        <p class="small">Aplicação em JavaScript dinâmico para cálculo automatizado de valores, adição e remoção de itens de um carrinho virtual.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-img-container">
+                        <img src="img/Alugames.png" alt="Projeto Alugames">
+                    </div>
+                    <div class="project-info">
+                        <h5 class="fw-bold fs-4">AluGames</h5>
+                        <p class="small">Interface de uma loja de aluguel de jogos de tabuleiro com lógica para alterar o estado do botão (Alugar/Devolver) e controlo de estoque.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#favoritosCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#favoritosCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
 
+        <h2 class="text-center fw-bold mb-5 pt-4">🚀 Últimos Trabalhos</h2>
+        <div id="portfolioCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="carousel-img-container">
+                        <img src="img/AmigoSecreto.png" alt="Amigo Secreto">
+                    </div>
+                    <div class="project-info">
+                        <h5 class="fw-bold fs-4">Amigo Secreto</h5>
+                        <p class="small">Web app desenvolvido para facilitar o sorteio de nomes de amigos ocultos de forma automatizada e justa.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-img-container">
+                        <img src="img/Ingresso.png" alt="E-Ticket Ingresso">
+                    </div>
+                    <div class="project-info">
+                        <h5 class="fw-bold fs-4">Ingresso</h5>
+                        <p class="small">Sistema de validação e compra de bilhetes online que desconta a quantidade disponível conforme as regras do evento.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-img-container">
+                        <img src="img/Numero Secreto.png" alt="Jogo Número Secreto">
+                    </div>
+                    <div class="project-info">
+                        <h5 class="fw-bold fs-4">Jogo do Número Secreto</h5>
+                        <p class="small">Jogo interativo  onde o usúario tenta adivinhar o número gerado pelo sistema utilizando manipulação do DOM.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-img-container">
+                        <img src="img/NumeroSecret2.0.png" alt="Número Secreto v2">
+                    </div>
+                    <div class="project-info">
+                        <h5 class="fw-bold fs-4">Número Secreto 2.0</h5>
+                        <p class="small">Uma versão evoluída do jogo clássico, com novos limites de dificuldade, design visual aprimorado e melhores mensagens de feedback.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-img-container">
+                        <img src="img/ScreenMatch.png" alt="ScreenMatch">
+                    </div>
+                    <div class="project-info">
+                        <h5 class="fw-bold fs-4">ScreenMatch</h5>
+                        <p class="small">Catálogo digital de filmes e séries que consome dados dinâmicos para calcular médias de avaliações e organizar recomendações.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-img-container">
+                        <img src="img/SorteadorNumeros.png" alt="Sorteador de Números">
+                    </div>
+                    <div class="project-info">
+                        <h5 class="fw-bold fs-4">Sorteador de Números</h5>
+                        <p class="small">Ferramenta utilitária útil para sorteios personalizados baseados em intervalos numéricos definidos pelo usúario.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </section>
 
+    <footer class="text-center py-4 mt-5 text-secondary">
+        <div class="container">
+            <p class="mb-1">© 2026 Bruno Dias. Desenvolvido com Bootstrap.</p>
+            <small>Transformando ideias em código.</small>
+        </div>
+    </footer>
 
-            <section class="bg-primary text-light">
-                <div class="container">
-
-
-                    <div class="row">
-
-
-
-                        <div class="col-6 col-md-3 rounded-3 border  text-center fst-italic pt-3"
-                            style="background-color: rgb(56, 79, 212);">
-                            <img class="border border-3" width="150" src="img/NumeroSecret2.0.png" alt="">
-                            <h3>Número Secreto 2.0</h3>
-                            <p>Site que faz um jogo com o usuário ate ele acertar.</p>
-
-                        </div>
-                        <div class="col-6 col-md-3 rounded-3 border  text-center fst-italic pt-3"
-                            style="background-color: rgb(56, 79, 212);">
-                            <img class="border border-3" width="150" src="img/AmigoSecreto.png" alt="">
-                            <h3>Amigo Secreto</h3>
-                            <p>Site que faz um sorteio de amigo secreto</p>
-
-                        </div>
-                        <div class="col-6 col-md-3 rounded-3 border  text-center fst-italic pt-3"
-                            style="background-color: rgb(56, 79, 212);">
-                            <img class="border border-3" width="150" src="img/Numero Secreto.png" alt="">
-                            <h3>Número Secreto </h3>
-                            <p>Site que faz um jogo com o usuário ate ele acerta o número</p>
-
-                        </div>
-
-                        <div class="col-6 col-md-3 rounded-3 border  text-center fst-italic pt-3 "
-                            style="background-color: rgb(56, 79, 212);">
-                            <img class="border border-3" width="150" src="img/ScreenMatch.png" alt="">
-                            <h3>Screen-match</h3>
-                            <p>Terminal privado sobre Filmes,suas notas,ano lançamento e gênero</p>
-
-                        </div>
-
-                        <div class="row">
-
-
-
-                            <div class="col-6 col-md-3 rounded-3 border  text-center fst-italic pt-3"
-                                style="background-color: rgb(56, 79, 212);">
-                                <img class="border border-3" width="150" src="img/Alugames.png" alt="">
-                                <h3>Alugames</h3>
-                                <p>Site de locação de filmes</p>
-
-                            </div>
-
-                            <div class="col-6 col-md-3 rounded-3 border  text-center fst-italic pt-3"
-                                style="background-color: rgb(56, 79, 212);">
-                                <img class="border border-3" width="150" src="img/Ingresso.png" alt="">
-                                <h2>Ingresso</h2>
-                                <p>Site de compra de ingressos</p>
-
-                            </div>
-                            <div class="col-6 col-md-3 rounded-3 border  text-center fst-italic pt-3"
-                                style="background-color: rgb(56, 79, 212);">
-                                <img class="border border-3" width="79" src="img/Favicon.png" alt="">
-                                <h3>Favicon</h3>
-                                <p>Favicon pessoal para atividades</p>
-
-                            </div>
-
-
-
-
-                        </div>
-
-
-
-
-            </section>
-
-
-
-        </main>
-
-        <footer>
-            <center>&copy;Bruno Dias</center>
-        </footer>
-
-
-    </header>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
